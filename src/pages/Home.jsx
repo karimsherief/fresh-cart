@@ -2,6 +2,7 @@ import { Banner, Loader, ProductsList } from "components";
 import { useInfiniteQuery } from "react-query";
 import axios from "axios";
 import { API } from "App";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const { status, data, hasNextPage, isFetchingNextPage, fetchNextPage } =
@@ -23,7 +24,8 @@ export default function Home() {
         products: res.data.data,
       };
     } catch (error) {
-      return error;
+      toast.error(error.message);
+      return [];
     }
   }
 
@@ -35,7 +37,13 @@ export default function Home() {
         <Banner />
       </section>
       <section className="py-2">
-        <ProductsList products={data.pages.flatMap((data) => data.products)} />
+        <ProductsList
+          products={
+            data.pages[0]?.products
+              ? data.pages.flatMap((data) => data.products)
+              : []
+          }
+        />
         {hasNextPage && (
           <button
             className="mx-auto d-block my-3 btn-outline-main"

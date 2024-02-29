@@ -414,6 +414,7 @@ footer form {
     width: 40px;
     font-size: 2rem;
     aspect-ratio: 1 / 1;
+    z-index: 9999;
 }
 
 .scroll-to-top:hover {

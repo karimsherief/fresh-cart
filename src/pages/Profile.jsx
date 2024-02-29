@@ -45,7 +45,11 @@ export default function Profile() {
         <h2>Name: {user.name}</h2>
         <h2>Email: {user.email}</h2>
 
-        <Stack direction="horizontal" gap={2} className="align-items-center">
+        <Stack
+          direction="horizontal"
+          gap={2}
+          className="flex-wrap align-items-center"
+        >
           <h4 className="m-0">Password: </h4>
           <Button
             variant="danger"

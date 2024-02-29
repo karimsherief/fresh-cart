@@ -37,7 +37,6 @@ export default function ProductsList({ products }) {
       await dispatch(addToCart({ token: user?.token, product })).unwrap();
       toast.success("Product added successfully");
     } catch (error) {
-      
       switch (error.status) {
         case 401:
           toast.error("You have to login first!", {
@@ -101,8 +100,8 @@ export default function ProductsList({ products }) {
       dispatch(getWishlist(user?.token));
     }
   }, [user, dispatch]);
-
-  if (!products?.length) return <p>No products</p>;
+  console.log(products);
+  if (!products.length) return <p>No products</p>;
 
   return (
     <Container>

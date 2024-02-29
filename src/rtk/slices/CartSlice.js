@@ -51,7 +51,7 @@ export const removeCartItem = createAsyncThunk(
       });
       return res.data;
     } catch (error) {
-      return rejectWithValue(error.response);
+      return rejectWithValue(error);
     }
   }
 );

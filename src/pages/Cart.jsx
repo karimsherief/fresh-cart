@@ -1,4 +1,4 @@
-import { Button, Col, Container, Row, Stack } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, Stack } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -16,15 +16,19 @@ export default function Cart() {
   );
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate( );
-  function handleUpdate(itemId, count) {
-    dispatch(
-      updateItemCount({
-        itemId,
-        count,
-        token: user?.token,
-      })
-    );
+  const navigate = useNavigate();
+  async function handleUpdate(itemId, count) {
+    try {
+      await dispatch(
+        updateItemCount({
+          itemId,
+          count,
+          token: user?.token,
+        })
+      ).unwrap();
+    } catch (error) {
+      toast.error(error?.message);
+    }
   }
   async function handleRemove(itemId) {
     try {
@@ -36,10 +40,17 @@ export default function Cart() {
       ).unwrap();
       toast.success("Item removed successfully");
     } catch (error) {
+      toast.error(error?.message);
+    }
+  }
+  async function handleClearCart() {
+    try {
+      await dispatch(clearUserCart(user?.token)).unwrap();
+      toast.success("Cart cleared successfully");
+    } catch (error) {
       toast.error(error);
     }
   }
-
   if (!cart.length)
     return (
       <section className="py-5 d-flex align-items-center justify-content-center flex-column">
@@ -50,45 +61,50 @@ export default function Cart() {
         </Link>
       </section>
     );
-  async function handleClearCart() {
-    try {
-      await dispatch(clearUserCart(user?.token)).unwrap();
-      toast.success("Cart cleared successfully");
-    } catch (error) {
-      toast.error(error);
-    }
-  }
+
   return (
     <section className="py-5">
       <Container>
-        <Button
-          variant="outline-danger"
-          className="d-block ms-auto"
-          onClick={handleClearCart}
-          disabled={isUpdating || isRemoving}
+        <Stack direction="horizontal" className="align-items-center mb-5">
+          <h2 className="m-0">My Cart</h2>
+          <Button
+            variant="outline-danger"
+            className="d-block ms-auto"
+            onClick={handleClearCart}
+            disabled={isUpdating || isRemoving}
+          >
+            Clear Cart
+          </Button>
+        </Stack>
+        <Row
+          xs={1}
+          sm={2}
+          md={3}
+          lg={4}
+          className="g-3 border-bottom border-3 pb-3"
         >
-          Clear Cart
-        </Button>
-        <Row>
           {cart.map((item) => (
-            <Col xs={6} key={item._id} className="border-bottom border-2 py-3">
-              <Row className="align-items-center">
-                <Col xs={3}>
-                  <img
-                    src={item.product.imageCover}
-                    alt={item.product.title}
-                    className="w-100"
-                    loading="lazy"
-                  />
-                </Col>
-                <Col xs={6}>
-                  <p>{item.product.title}</p>
-                  <p>{formatCurrency(item.price * item.count)}</p>
-                </Col>
-                <Col xs={3}>
+            <Col key={item._id}>
+              <Card>
+                <Card.Img
+                  src={item.product.imageCover}
+                  alt={item.product.title}
+                  className="w-100"
+                  loading="lazy"
+                  variant="top"
+                />
+                <Card.Body>
+                  <Card.Title>
+                    {item.product.title.split` `.slice(0, 2).join` `}
+                  </Card.Title>
+                  <Card.Text>
+                    {formatCurrency(item.price * item.count)}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer>
                   <Stack
                     direction="horizontal"
-                    className="justify-content-between mb-1"
+                    className="justify-content-center gap-3"
                   >
                     <Button
                       variant="danger"
@@ -99,7 +115,7 @@ export default function Cart() {
                     >
                       -
                     </Button>
-                    <span>{item.count}</span>
+                    <span className="fw-bold">{item.count}</span>
                     <Button
                       variant="primary"
                       onClick={() =>
@@ -112,14 +128,14 @@ export default function Cart() {
                   </Stack>
                   <Button
                     variant="danger"
-                    className="d-block w-100"
+                    className="d-block mx-auto mt-3 text-capitalize"
                     onClick={() => handleRemove(item.product.id)}
                     disabled={isRemoving || isUpdating}
                   >
                     <MdDelete /> remove
                   </Button>
-                </Col>
-              </Row>
+                </Card.Footer>
+              </Card>
             </Col>
           ))}
         </Row>
