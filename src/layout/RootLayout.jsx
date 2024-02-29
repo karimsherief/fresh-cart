@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Navbar, Footer, ScrollToTop } from "components";
 import toast, { Toaster } from "react-hot-toast";
-import { Detector } from "react-detect-offline";
 import { FaWifi } from "react-icons/fa";
 import { MdWifiOff } from "react-icons/md";
 import { useEffect } from "react";

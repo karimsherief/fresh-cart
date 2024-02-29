@@ -373,6 +373,11 @@ footer form {
 }
 
 
+@media screen and (min-width:992px) {
+    .banner__slider {
+        height: 500px;
+    }
+}
 
 .banner .vstack img:first-child {
     border-radius: 0 0.375rem 0 0;

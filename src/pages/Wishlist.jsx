@@ -72,44 +72,42 @@ export default function Wishlist() {
     <section className="py-5">
       <Container>
         <h2>My wishlist</h2>
-        <Row>
-          {wishlist.map((product) => (
-            <Stack
-              key={product.id}
-              direction="horizontal"
-              className="border-bottom border-2"
+        {wishlist.map((product) => (
+          <Row key={product.id} className="align-items-center py-3 border-bottom border-3">
+            <Col xs={4} md={2}>
+              <Image
+                src={product.imageCover}
+                alt={product.title}
+                className="w-100"
+              />
+            </Col>
+            <Col
+              xs={8}
+              md={7}
+              className="d-flex flex-column justify-content-center"
             >
-              <Col md={2}>
-                <Image
-                  src={product.imageCover}
-                  alt={product.title}
-                  className="w-100"
-                />
-              </Col>
-              <Col md={7}>
-                <h4>{product.title}</h4>
-                <h5>{formatCurrency(product.price)}</h5>
-              </Col>
-              <Col md={3}>
-                <Stack gap={3}>
-                  <button
-                    className="btn-outline-main text-capitalize"
-                    onClick={() => handleAdd(product.id)}
-                  >
-                    add to cart
-                  </button>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(product.id)}
-                    className="d-flex align-items-center justify-content-center gap-2"
-                  >
-                    <MdDelete /> Remove
-                  </Button>
-                </Stack>
-              </Col>
-            </Stack>
-          ))}
-        </Row>
+              <h4>{product.title}</h4>
+              <h5>{formatCurrency(product.price)}</h5>
+            </Col>
+            <Col xs={12} md={3}>
+              <Stack gap={3}>
+                <button
+                  className="btn-outline-main text-capitalize"
+                  onClick={() => handleAdd(product.id)}
+                >
+                  add to cart
+                </button>
+                <Button
+                  variant="danger"
+                  onClick={() => handleDelete(product.id)}
+                  className="d-flex align-items-center justify-content-center gap-2"
+                >
+                  <MdDelete /> Remove
+                </Button>
+              </Stack>
+            </Col>
+          </Row>
+        ))}
       </Container>
     </section>
   );

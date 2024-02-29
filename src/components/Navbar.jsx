@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 // UI
 import {
@@ -21,7 +21,8 @@ export default function Navbar() {
   const { user } = useSelector((state) => state.user);
   const { cart, isLoading } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const menuRef = useRef();
+  const { pathname } = useLocation();
   function handleLogout() {
     dispatch(clearCart());
     dispatch(logout());
@@ -40,7 +41,9 @@ export default function Navbar() {
       handleUserCart();
     }
   }, [user]);
-  
+  useEffect(() => {
+    menuRef.current?.click();
+  }, [pathname]);
   if (isLoading) return <Loader />;
 
   return (
@@ -49,7 +52,7 @@ export default function Navbar() {
         <NavbarBS.Brand as={Link} to="/">
           <Image src="images/logo.svg" alt="logo" className="w-100" />
         </NavbarBS.Brand>
-        <NavbarBS.Toggle aria-controls="basic-navbar-nav" />
+        <NavbarBS.Toggle aria-controls="basic-navbar-nav" ref={menuRef} />
         <NavbarBS.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/">

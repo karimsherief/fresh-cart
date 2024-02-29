@@ -2,7 +2,7 @@ import { API } from "App";
 import axios from "axios";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Stack } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "rtk/slices/UserSlice";
@@ -44,6 +44,16 @@ export default function Profile() {
       <Container>
         <h2>Name: {user.name}</h2>
         <h2>Email: {user.email}</h2>
+
+        <Stack direction="horizontal" gap={2} className="align-items-center">
+          <h4 className="m-0">Password: </h4>
+          <Button
+            variant="danger"
+            onClick={() => setChangePassword((prev) => !prev)}
+          >
+            {changePassword ? "Cancel" : "Change Password"}
+          </Button>
+        </Stack>
         {changePassword && (
           <Formik
             initialValues={{
@@ -65,7 +75,7 @@ export default function Profile() {
               dirty,
               isValid,
             }) => (
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} className="my-5">
                 <Form.Group>
                   <Form.Label>Current Password</Form.Label>
                   <Form.Control
@@ -107,24 +117,17 @@ export default function Profile() {
                     <p className="small text-danger">{errors.rePassword}</p>
                   )}
                 </Form.Group>
-                <Button
+                <button
                   type="submit"
-                  variant="dark"
-                  className="mx-auto d-block my-2"
+                  className="mx-auto d-block my-2 btn-outline-main"
                   disabled={isSubmitting || !dirty || !isValid}
                 >
                   Change Password
-                </Button>
+                </button>
               </Form>
             )}
           </Formik>
         )}
-        <Button
-          variant="danger"
-          onClick={() => setChangePassword((prev) => !prev)}
-        >
-          {changePassword ? "Cancel" : "Change Password"}
-        </Button>
       </Container>
     </section>
   );

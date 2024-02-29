@@ -22,7 +22,7 @@ export default function Banner() {
     <Container>
       <div className="banner rounded-3 shadow-md overflow-hidden mb-5 ">
         <Row className="g-0">
-          <Col xs={12} lg={9} className="p-0" style={{ height: "500px" }}>
+          <Col xs={12} lg={9} className="p-0 banner__slider">
             <Swiper
               pagination={{
                 clickable: true,
@@ -102,7 +102,7 @@ export default function Banner() {
             480: {
               slidesPerView: 3,
             },
-            700: {
+            800: {
               slidesPerView: 5,
             },
           }}
