@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { API } from "App";
 import axios from "axios";
 export const getCart = createAsyncThunk(
   "cart/getCart",
   async (token, { rejectWithValue }) => {
     try {
-      const res = await axios.get("/cart", {
+      const res = await axios.get(`${API}/cart`, {
         headers: {
           token,
         },
@@ -22,7 +23,7 @@ export const addToCart = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        "/cart",
+        `${API}/cart`,
         {
           productId: values.product.id,
         },
@@ -43,7 +44,7 @@ export const removeCartItem = createAsyncThunk(
   "cart/removeCartItem",
   async (values, { rejectWithValue }) => {
     try {
-      const res = await axios.delete(`/cart/${values.itemId}`, {
+      const res = await axios.delete(`${API}/cart/${values.itemId}`, {
         headers: {
           token: values.token,
         },
@@ -58,7 +59,7 @@ export const clearUserCart = createAsyncThunk(
   "cart/clearUserCart",
   async (token, { rejectWithValue }) => {
     try {
-      await axios.delete("/cart", {
+      await axios.delete(`${API}/cart`, {
         headers: {
           token
         },
@@ -75,7 +76,7 @@ export const updateItemCount = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
       const res = await axios.put(
-        `/cart/${values.itemId}`,
+        `${API}/cart/${values.itemId}`,
         {
           count: values.count,
         },

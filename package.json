@@ -1,7 +1,6 @@
 {
   "homepage": "https://karimsherief.github.io/freshcart/",
   "name": "ecommerce",
-  "proxy": "https://ecommerce.routemisr.com/api/v1",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

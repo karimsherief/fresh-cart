@@ -2,6 +2,7 @@ import { Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { Formik } from "formik";
 import { useState } from "react";
+import { API } from "App";
 
 export default function ConfirmCode({ setCurrentStep }) {
   const [error, setError] = useState(null);
@@ -9,7 +10,7 @@ export default function ConfirmCode({ setCurrentStep }) {
     setSubmitting(true);
     setError("");
     try {
-      await axios.post("/auth/verifyResetCode", values);
+      await axios.post(`${API}/auth/verifyResetCode`, values);
       setCurrentStep((prev) => prev + 1);
       resetForm();
     } catch (error) {

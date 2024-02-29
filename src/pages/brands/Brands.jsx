@@ -1,3 +1,4 @@
+import { API } from "App";
 import axios from "axios";
 import { Loader } from "components";
 import { Card, Col, Row } from "react-bootstrap";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Brands() {
   const { isLoading, data } = useQuery("brands", getBrands);
   function getBrands() {
-    return axios.get("/brands");
+    return axios.get(`${API}/brands`);
   }
   if (isLoading) return <Loader />;
 

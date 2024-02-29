@@ -1,3 +1,4 @@
+import { API } from "App";
 import axios from "axios";
 import { Loader } from "components";
 import { Card, Col, Row } from "react-bootstrap";
@@ -7,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Categories() {
   const { isLoading, data } = useQuery("categories", getCategories);
   function getCategories() {
-    return axios.get("/categories");
+    return axios.get(`${API}/categories`);
   }
   if (isLoading) return <Loader />;
 

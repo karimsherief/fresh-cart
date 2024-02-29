@@ -1,3 +1,4 @@
+import { API } from "App";
 import axios from "axios";
 import { Formik } from "formik";
 import React from "react";
@@ -12,7 +13,7 @@ export default function Checkout() {
   async function handleSubmit(values) {
     try {
       const res = await axios.post(
-        `/orders/checkout-session/${cartId}?url=${window.location.origin}/freshcart`,
+        `${API}/orders/checkout-session/${cartId}?url=${window.location.origin}/freshcart`,
         values,
         {
           headers: {

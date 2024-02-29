@@ -1,3 +1,4 @@
+import { API } from "App";
 import axios from "axios";
 import { Loader } from "components";
 
@@ -13,7 +14,7 @@ export default function Orders() {
   const { data, isLoading } = useQuery(["orders", user.id], getOrders);
 
   function getOrders({ queryKey }) {
-    return axios.get(`/orders/user/${queryKey[1]}`);
+    return axios.get(`${API}/orders/user/${queryKey[1]}`);
   }
   function handleDate(timestamp) {
     const date = new Date(timestamp);

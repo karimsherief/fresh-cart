@@ -1,3 +1,4 @@
+import { API } from "App";
 import axios from "axios";
 import { Formik } from "formik";
 import React, { useState } from "react";
@@ -25,7 +26,7 @@ export default function Profile() {
   });
   async function handleSubmit(values) {
     try {
-      await axios.put("/users/changeMyPassword", values, {
+      await axios.put(`${API}/users/changeMyPassword`, values, {
         headers: {
           token: user.token,
         },

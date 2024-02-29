@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/freshcart/static/css/main.b0eefb83.css",
+    "main.js": "/freshcart/static/js/main.57f2dfef.js",
+    "index.html": "/freshcart/index.html",
+    "main.b0eefb83.css.map": "/freshcart/static/css/main.b0eefb83.css.map",
+    "main.57f2dfef.js.map": "/freshcart/static/js/main.57f2dfef.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b0eefb83.css",
+    "static/js/main.57f2dfef.js"
+  ]
+}

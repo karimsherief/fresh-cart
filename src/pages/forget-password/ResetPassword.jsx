@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import * as Yup from "yup";
 import axios from "axios";
+import { API } from "App";
 
 export default function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +25,7 @@ export default function ResetPassword() {
     setSubmitting(true);
     setError("");
     try {
-      await axios.put("/auth/resetPassword", values);
+      await axios.put(`${API}/auth/resetPassword`, values);
 
       navigate("/login", {
         replace: true,

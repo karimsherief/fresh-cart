@@ -3,6 +3,7 @@ import { Loader } from "components";
 import { useQueries } from "react-query";
 import { useParams } from "react-router-dom";
 import { ProductsList } from "components";
+import { API } from "App";
 
 export default function SingleCategory() {
   const { categoryId } = useParams();
@@ -20,10 +21,10 @@ export default function SingleCategory() {
     },
   ]);
   function getCategoryDetails(id) {
-    return axios.get(`/categories/${id}`);
+    return axios.get(`${API}/categories/${id}`);
   }
   function getProducts(id) {
-    return axios.get(`/products?category=${id}`);
+    return axios.get(`${API}/products?category=${id}`);
   }
 
   if (isCategoryLoading || isProductsLoading) return <Loader />;

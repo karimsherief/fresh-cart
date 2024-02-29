@@ -1,6 +1,7 @@
 import { Banner, Loader, ProductsList } from "components";
 import { useInfiniteQuery } from "react-query";
 import axios from "axios";
+import { API } from "App";
 
 export default function Home() {
   const { status, data, hasNextPage, isFetchingNextPage, fetchNextPage } =
@@ -12,7 +13,7 @@ export default function Home() {
 
   async function getProducts(page) {
     try {
-      const res = await axios.get(`/products?limit=10&page=${page}`);
+      const res = await axios.get(`${API}/products?limit=10&page=${page}`);
 
       const hasNextPage =
         res.data.metadata.currentPage < res.data.metadata.numberOfPages;

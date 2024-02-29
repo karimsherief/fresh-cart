@@ -6,11 +6,12 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { Loader } from "./";
 import "swiper/css/pagination";
+import { API } from "App";
 export default function Banner() {
   const { data, isLoading } = useQuery("categories", getCategories);
 
   function getCategories() {
-    return axios.get("/categories");
+    return axios.get(`${API}/categories`);
   }
 
   if (isLoading) return <Loader />;

@@ -3,6 +3,7 @@ import { Loader } from "components";
 import { useQueries } from "react-query";
 import { useParams } from "react-router-dom";
 import { ProductsList } from "components";
+import { API } from "App";
 
 export default function SingleBrand() {
   const { brandId } = useParams();
@@ -20,10 +21,10 @@ export default function SingleBrand() {
     },
   ]);
   function getBrandDetails(id) {
-    return axios.get(`/brands/${id}`);
+    return axios.get(`${API}/brands/${id}`);
   }
   function getProducts(id) {
-    return axios.get(`/products?brand=${id}`);
+    return axios.get(`${API}/products?brand=${id}`);
   }
 
   if (isBrandLoading || isProductsLoading) return <Loader />;

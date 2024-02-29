@@ -31,7 +31,7 @@ import {
 } from "layout";
 
 import ProtectedRoutes from "utils/ProtectedRoutes";
-
+export const API = "https://ecommerce.routemisr.com/api/v1";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>

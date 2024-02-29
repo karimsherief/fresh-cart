@@ -3,6 +3,7 @@ import axios from "axios";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
+import { API } from "App";
 
 export default function MailConfirmation({ setCurrentStep }) {
   const [error, setError] = useState(null);
@@ -13,7 +14,7 @@ export default function MailConfirmation({ setCurrentStep }) {
     setSubmitting(true);
     setError("");
     try {
-      await axios.post("/auth/forgotPasswords", values);
+      await axios.post(`${API}/auth/forgotPasswords`, values);
       resetForm();
       setCurrentStep((prev) => prev + 1);
     } catch (error) {

@@ -24,6 +24,7 @@ import { FreeMode, Thumbs } from "swiper/modules";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { API } from "App";
 
 export default function ProductDetails() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -42,7 +43,7 @@ export default function ProductDetails() {
   );
 
   function getProductDetails({ queryKey }) {
-    return axios.get(`/products/${queryKey[1]}`);
+    return axios.get(`${API}/products/${queryKey[1]}`);
   }
   if (isLoading) return <Loader />;
 

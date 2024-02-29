@@ -1,3 +1,4 @@
+import { API } from "App";
 import axios from "axios";
 import { Loader, ProductsList } from "components";
 import { useState } from "react";
@@ -9,7 +10,7 @@ export default function Products() {
   const { data, isLoading } = useQuery(["products", "all"], getProducts);
   const [searchValue, setSearchValue] = useState("");
   function getProducts() {
-    return axios.get(`/products?limit=${Number.MAX_SAFE_INTEGER}`);
+    return axios.get(`${API}/products?limit=${Number.MAX_SAFE_INTEGER}`);
   }
 
   if (isLoading) return <Loader />;
