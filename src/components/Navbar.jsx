@@ -42,7 +42,9 @@ export default function Navbar() {
     }
   }, [user]);
   useEffect(() => {
-    menuRef.current?.click();
+    if (!menuRef.current?.className.includes("collapsed")) {
+      menuRef.current?.click();
+    }
   }, [pathname]);
   if (isLoading) return <Loader />;
 

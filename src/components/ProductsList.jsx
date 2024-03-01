@@ -100,7 +100,7 @@ export default function ProductsList({ products }) {
       dispatch(getWishlist(user?.token));
     }
   }, [user, dispatch]);
-  console.log(products);
+
   if (!products.length) return <p>No products</p>;
 
   return (

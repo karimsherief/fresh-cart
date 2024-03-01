@@ -228,6 +228,7 @@ body {
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .product:hover {
@@ -236,6 +237,7 @@ body {
 }
 
 .product .btn {
+    position: relative;
     transition: .3s ease;
     transform: translateY(100%);
     opacity: 0;
@@ -247,13 +249,20 @@ body {
 
 .product:hover .btn {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(0);
+    visibility: visible;
 }
 
 .product .btn:hover {
     background-color: #3dd43d;
 }
 
+@media screen and (max-width:800px) {
+    .product .btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .heart {
     background-color: transparent;
